@@ -2,7 +2,8 @@ package org.tuke.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
+{
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
@@ -18,8 +19,6 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected String[] getServletMappings() {
-		// TODO Auto-generated method stub
-		return new String[] {"/"};
-	}
+		return new String[] {"/"};	}
 
 }
