@@ -1,7 +1,9 @@
 package org.tuke.repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 
@@ -11,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.tuke.entity.Cliente;
 
 public class ClienteDAOImpl implements ClienteDAO {
@@ -27,6 +30,8 @@ public class ClienteDAOImpl implements ClienteDAO {
 	@Autowired
 	SimpleJdbcInsert simpleJdbcInsert2;
 	
+	
+	
 
 	@Override
 	public List<Cliente> findAll() {
@@ -36,6 +41,10 @@ public class ClienteDAOImpl implements ClienteDAO {
 		String sql = "select * from table_clients";
 		return jdbcTemplate.query(sql, new ClienteRowMapper());
 	}
+	
+	
+	// Create GeneratedKeyHolder object
+    GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
 
 
 	@Override
@@ -43,11 +52,21 @@ public class ClienteDAOImpl implements ClienteDAO {
 		
 		String query = "INSERT INTO table_clients (username, pass, data_base) values (?,?,?)";
 		
-		jdbcTemplate.update(query, 
-				cliente.getUsername(),
-				cliente.getPass(),
-				cliente.getData_base());	
-		 
+		// To insert data, you need to pre-compile the SQL and set up the data yourself.
+        int rowsAffected = jdbcTemplate.update(conn -> {
+            
+            // Pre-compiling SQL
+        	PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        	preparedStatement.setString(1, cliente.getUsername());
+        	preparedStatement.setString(2, cliente.getPass());
+        	preparedStatement.setString(3, cliente.getData_base());
+
+        	return preparedStatement;
+        }, generatedKeyHolder);
+        
+        // Get auto-incremented ID
+        Integer id = generatedKeyHolder.getKey().intValue();
+		
 	}
 	
 

@@ -36,7 +36,7 @@ public class HomeController {
 	
 	
 	
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<Object> get(){ 
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -49,7 +49,7 @@ public class HomeController {
 		} 
  	}
 	
-	@PostMapping("/edit")
+	@PostMapping
 	public void create(@RequestBody Cliente cliente){ 
 		repository.addCliente(cliente);
 	}
