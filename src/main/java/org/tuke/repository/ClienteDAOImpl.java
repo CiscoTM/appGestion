@@ -48,7 +48,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 
 	@Override
-	public void addCliente(Cliente cliente) {
+	public Integer addCliente(Cliente cliente) {
 		
 		String query = "INSERT INTO table_clients (username, pass, data_base) values (?,?,?)";
 		
@@ -66,7 +66,9 @@ public class ClienteDAOImpl implements ClienteDAO {
         
         // Get auto-incremented ID
         Integer id = generatedKeyHolder.getKey().intValue();
+        return id;
 		
+				 
 	}
 	
 

@@ -9,7 +9,7 @@ import org.tuke.entity.Cliente;
 public interface ClienteDAO {
 	
 	List<Cliente> findAll();
-	void addCliente(Cliente cliente);
+	Integer addCliente(Cliente cliente);
 	
 	
 	
