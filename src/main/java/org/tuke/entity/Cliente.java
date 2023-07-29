@@ -7,6 +7,8 @@ public class Cliente {
 	private String pass;
 	private String data_base;
 	
+	
+	
 	public int getId_cliente() {
 		return id_cliente;
 	}

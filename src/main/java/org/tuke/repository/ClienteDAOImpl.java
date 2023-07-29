@@ -37,12 +37,19 @@ public class ClienteDAOImpl implements ClienteDAO {
 		return jdbcTemplate.query(sql, new ClienteRowMapper());
 	}
 
+
 	@Override
-	public int addClienteWithSimpleJdbcInsert(Cliente cliente) {
-		simpleJdbcInsert.withTableName("table_clients");
+	public void addCliente(Cliente cliente) {
 		
-		return 0;
+		String query = "INSERT INTO table_clients (username, pass, data_base) values (?,?,?)";
+		
+		jdbcTemplate.update(query, 
+				cliente.getUsername(),
+				cliente.getPass(),
+				cliente.getData_base());	
+		 
 	}
+	
 
 }
 
@@ -56,7 +63,7 @@ class ClienteRowMapper implements RowMapper<Cliente>{
 		cliente.setId_cliente(rs.getInt("id_cliente"));
 		cliente.setUsername(rs.getString("username"));
 		cliente.setPass(rs.getString("pass"));
-		cliente.setData_base("data_base");
+		cliente.setData_base(rs.getString("data_base"));
 		
 		return cliente;
 	}
