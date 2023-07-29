@@ -10,7 +10,8 @@ public interface ClienteDAO {
 	
 	List<Cliente> findAll();
 	Integer addCliente(Cliente cliente);
-	
+	void update(String username, int id);
+	void delete(int id);
 	
 	
 

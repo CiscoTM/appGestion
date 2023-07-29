@@ -6,8 +6,7 @@ public class Cliente {
 	private String username;
 	private String pass;
 	private String data_base;
-	
-	
+	private int active;
 	
 	public int getId_cliente() {
 		return id_cliente;
@@ -33,6 +32,13 @@ public class Cliente {
 	public void setData_base(String data_base) {
 		this.data_base = data_base;
 	}
+	public int getActive() {
+		return active;
+	}
+	public void setActive(int active) {
+		this.active = active;
+	}
+	
 	@Override
 	public String toString() {
 		return "Clientes [id_cliente=" + id_cliente + ", username=" + username + ", pass=" + pass + ", data_base="
